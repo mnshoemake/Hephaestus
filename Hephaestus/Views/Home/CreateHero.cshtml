@@ -1,0 +1,106 @@
+﻿@model Hephaestus.Models.Hero
+
+@{
+    ViewData["Title"] = "Create Hero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+<h4>Hero</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="View">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HeroID" class="control-label"></label>
+                <input asp-for="HeroID" class="form-control" />
+                <span asp-validation-for="HeroID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Epithet" class="control-label"></label>
+                <input asp-for="Epithet" class="form-control" />
+                <span asp-validation-for="Epithet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lineage" class="control-label"></label>
+                <input asp-for="Lineage" class="form-control" />
+                <span asp-validation-for="Lineage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsDemigod" /> @Html.DisplayNameFor(model => model.IsDemigod)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pronouns" class="control-label"></label>
+                <input asp-for="Pronouns" class="form-control" />
+                <span asp-validation-for="Pronouns" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="God" class="control-label"></label>
+                <input asp-for="God" class="form-control" />
+                <span asp-validation-for="God" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtsAndOrationDie" class="control-label"></label>
+                <input asp-for="ArtsAndOrationDie" class="form-control" />
+                <span asp-validation-for="ArtsAndOrationDie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodAndValorDie" class="control-label"></label>
+                <input asp-for="BloodAndValorDie" class="form-control" />
+                <span asp-validation-for="BloodAndValorDie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftAndReasonDie" class="control-label"></label>
+                <input asp-for="CraftAndReasonDie" class="form-control" />
+                <span asp-validation-for="CraftAndReasonDie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResolveAndSpiritDie" class="control-label"></label>
+                <input asp-for="ResolveAndSpiritDie" class="form-control" />
+                <span asp-validation-for="ResolveAndSpiritDie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DivineFavorGod1" class="control-label"></label>
+                <input asp-for="DivineFavorGod1" class="form-control" />
+                <span asp-validation-for="DivineFavorGod1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DivineFavorGod2" class="control-label"></label>
+                <input asp-for="DivineFavorGod2" class="form-control" />
+                <span asp-validation-for="DivineFavorGod2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavoreScore1" class="control-label"></label>
+                <input asp-for="FavoreScore1" class="form-control" />
+                <span asp-validation-for="FavoreScore1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavorScore2" class="control-label"></label>
+                <input asp-for="FavorScore2" class="form-control" />
+                <span asp-validation-for="FavorScore2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
