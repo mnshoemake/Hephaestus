@@ -4,7 +4,13 @@
     ViewData["Title"] = "Create Hero";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script type="text/javascript">
+    var bwidth=0
+    $("button.btnGroup").each(function(i,v){
+        if($(v).width()>bwidth) bwidth=$(v).width();
+    });
+    $("button.btnGroup").width(bwidth);
+</script>
 <h2>View</h2>
 
 <h4>Create Hero</h4>
@@ -22,15 +28,12 @@
             </div>
             <div class="form-inline">
                 <div class="form-group">
-
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" required />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-inline">
-                <row>
-
                 <div class="form-group">
                     <label asp-for="Lineage" class="control-label"></label>
                     <input asp-for="Lineage" class="form-control" />
@@ -41,7 +44,6 @@
                     <input asp-for="Pronouns" class="form-control" />
                     <span asp-validation-for="Pronouns" class="text-danger"></span>
                 </div>
-                </row>
             </div>
             <div class="form-inline">
                 <div class="form-group">
@@ -53,45 +55,35 @@
                 </div>
             </div>
             <div class="form-inline">
-            <div class="form-group">
-                <label asp-for="God" class="control-label">Honored God</label>
-                <input asp-for="God" class="form-control" />
-                <span asp-validation-for="God" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="God" class="control-label">Honored God</label>
+                    <input asp-for="God" class="form-control" />
+                    <span asp-validation-for="God" class="text-danger"></span>
+                </div>
             </div>
 
             <div class="form-inline">
-            <div class="form-group">
-                <label asp-for="Strength" class="control-label"></label>
-                <input asp-for="Strength" class="form-control" />
-                <span asp-validation-for="God" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Strength" class="control-label"></label>
+                    <input asp-for="Strength" class="form-control" />
+                    <span asp-validation-for="God" class="text-danger"></span>
+                </div>
             </div>
 
-                <div class="form-group">
-                    <label asp-for="DivineFavorGod1" class="control-label"></label>
-                    <input asp-for="DivineFavorGod1" class="form-control" />
-                    <span asp-validation-for="DivineFavorGod1" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="DivineFavorGod2" class="control-label"></label>
-                    <input asp-for="DivineFavorGod2" class="form-control" />
-                    <span asp-validation-for="DivineFavorGod2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FavorScore1" class="control-label"></label>
-                    <input asp-for="FavorScore1" class="form-control" />
-                    <span asp-validation-for="FavorScore1" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FavorScore2" class="control-label"></label>
-                    <input asp-for="FavorScore2" class="form-control" />
-                    <span asp-validation-for="FavorScore2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-</form>
+            <div class="form-group">
+                <label asp-for="FavorScore1" class="control-label"></label>
+                <input asp-for="FavorScore1" class="form-control" />
+                <span asp-validation-for="FavorScore1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavorScore2" class="control-label"></label>
+                <input asp-for="FavorScore2" class="form-control" />
+                <span asp-validation-for="FavorScore2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
         <row>
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
@@ -122,13 +114,61 @@
             <span asp-validation-for="ResolveAndSpiritDie" class="text-danger"></span>
         </div>
     </div>
+
+</div>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-info"><b>Authority</b><br />Zeus</button>
+    <button type="button" class="btn btn-info"><b>Beauty</b><br />Aphrodite</button>
+    <button type="button" class="btn btn-info"><b>Conviction</b><br />Demeter</button>
+    <button type="button" class="btn btn-info"><b>Cunning</b><br />Hera</button>
+    <br/>
+
+</div>
+<br/>
+    <div class="btn-group">
+        
+            <button type="button" class="btn btn-info"><b>Daring</b><br />Hermes</button>
+        
+        
+            <button type="button" class="btn btn-info"><b>Ferocity</b><br />Ares</button>
+        
+        
+            <button type="button" class="btn btn-info"><b>Fortitude</b><br />Poseidon</button>
+        
+        
+            <button type="button" class="btn btn-info"><b>Ingenuity</b><br />Hephaistos</button>
+        
+    </div>
+<br/>
+    <div class="btn-group">
+        
+            <button type="button" class="btn btn-info"><b>Insight</b><br />Hekate</button>
+        
+        
+            <button type="button" class="btn btn-info"><b>Knowledge</b><br />Apollo</button>
+        
+        
+            <button type="button" class="btn btn-info"><b>Precision</b><br />Artemis</button>
+
+            <button type="button" class="btn btn-info"><b>Wisdom</b><br />Athena</button>
+    </div>
     
-</div>
+    @*<div class="form-group">
+            <label asp-for="DivineFavorGod1" class="control-label"></label>
+            <input asp-for="DivineFavorGod1" class="form-control" />
+            <span asp-validation-for="DivineFavorGod1" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DivineFavorGod2" class="control-label"></label>
+            <input asp-for="DivineFavorGod2" class="form-control" />
+            <span asp-validation-for="DivineFavorGod2" class="text-danger"></span>
+        </div>*@
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

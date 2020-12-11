@@ -26,9 +26,13 @@ namespace Hephaestus.Models
         public string Pronouns { get; set; }
         public string God { get; set; }
         public string Strength { get; set; }
+        [Display(Name = "Arts & Oration")]
         public int ArtsAndOrationDie { get; set; }
+        [Display(Name = "Blood & Valor")]
         public int BloodAndValorDie { get; set; }
+        [Display(Name = "Craft & Reason")]
         public int CraftAndReasonDie { get; set; }
+        [Display(Name = "Resolve & Spirit")]
         public int ResolveAndSpiritDie { get; set; }
         public God DivineFavorGod1 { get; set; }
         public God DivineFavorGod2 { get; set; }
