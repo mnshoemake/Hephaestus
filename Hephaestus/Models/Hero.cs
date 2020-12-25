@@ -12,7 +12,7 @@ namespace Hephaestus.Models
     {
         public Hero(string epithet, string name)
         {
-          this.HeroId = heroId;
+          this.HeroId = GetNextHeroId();
           this.Epithet = epithet;
           this.Name = name;
         }
