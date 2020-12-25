@@ -38,7 +38,7 @@ namespace Hephaestus.Controllers
             return View();
         }
 
-        public IActionResult CreateUserProfile()
+        public IActionResult CreateUser()
         {
             return View();
         }

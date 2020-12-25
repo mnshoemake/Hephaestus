@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Hephaestus.Models
 {
-    public class UserProfile
+    public class User
     {
-        public UserProfile(int userID, string userName, string emailAddress)
+        public User(int userID, string userName, string emailAddress)
         {
             this.UserId = userID;
             this.UserName = userName;

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Hephaestus.Models
 {
@@ -10,12 +12,13 @@ namespace Hephaestus.Models
     {
         public Hero(string epithet, string name)
         {
-  //          this.HeroId = heroId;
-            this.Epithet = epithet;
-            this.Name = name;
+          this.HeroId = heroId;
+          this.Epithet = epithet;
+          this.Name = name;
         }
 
-//        public int HeroId { get; set; }
+        [Key]
+        public int HeroId { get; set; }
         [Required]
         public string Epithet { get; set; }
         [Required]
@@ -39,7 +42,19 @@ namespace Hephaestus.Models
         public int FavorScore1 { get; set; }
         public int FavorScore2 { get; set; }
         public string Notes { get; set; }
+
+
+        private int GetNextHeroId()
+        {
+            int lastHeroId = 0;
+
+            //do sql stuff to get last used numgen
+
+            return lastHeroId + 1;
+        }
     }
+
+
 
     public enum Domain
     {
