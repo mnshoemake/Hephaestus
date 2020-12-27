@@ -21,13 +21,15 @@ namespace Hephaestus.Models
         public int HeroId { get; set; }
         [Required]
         public string Epithet { get; set; }
+        public int EpithetDie { get; set; }
         [Required]
         public string Name { get; set; }
+        public int NameDie { get; set; }
         public string Lineage { get; set; }
         [Display(Name = "Descended from a God?")]
         public bool IsDemigod { get; set; }
         public string Pronouns { get; set; }
-        public string God { get; set; }
+        public string HonoredGod { get; set; }
         public string Strength { get; set; }
         [Display(Name = "Arts & Oration")]
         public int ArtsAndOrationDie { get; set; }
@@ -37,10 +39,14 @@ namespace Hephaestus.Models
         public int CraftAndReasonDie { get; set; }
         [Display(Name = "Resolve & Spirit")]
         public int ResolveAndSpiritDie { get; set; }
-        public God DivineFavorGod1 { get; set; }
-        public God DivineFavorGod2 { get; set; }
+        public string FavorGodName1 { get; set; }
+        public string FavorGodName2 { get; set; }
+        public string FavorGodName3 { get; set; }
+        public string FavorGodName4 { get; set; }
         public int FavorScore1 { get; set; }
         public int FavorScore2 { get; set; }
+        public int FavorScore3 { get; set; }
+        public int FavorScore4 { get; set; }
         public string Notes { get; set; }
 
 
