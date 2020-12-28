@@ -12,13 +12,13 @@ namespace Hephaestus.Models
     {
         public Hero(string epithet, string name)
         {
-          this.HeroId = GetNextHeroId();
+          this.Id = GetNextHeroId();
           this.Epithet = epithet;
           this.Name = name;
         }
 
         [Key]
-        public int HeroId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Epithet { get; set; }
         public int EpithetDie { get; set; }

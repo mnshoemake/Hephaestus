@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201228012850_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201228012850_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201228013836_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201228013836_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201228033629_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201228033629_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201228215549_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201228215549_InitialCreate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.14" />
@@ -18,6 +29,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
