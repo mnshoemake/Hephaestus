@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hephaestus.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +26,11 @@ namespace Hephaestus
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connString = Environment.GetEnvironmentVariable("HephaestusDB") ?? "";
+
+            services.AddDbContext<HephaestusContext>(options =>
+                options.UseSqlServer(connString));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

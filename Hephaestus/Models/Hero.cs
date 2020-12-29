@@ -10,11 +10,56 @@ namespace Hephaestus.Models
 {
     public class Hero
     {
-        public Hero(string epithet, string name)
+        public Hero(int id,
+            string epithet,
+            int epithetDie,
+            string name,
+            int nameDie,
+            string lineage,
+            bool isDemigod,
+            string pronouns,
+            string honoredGod,
+            string strength,
+            int artsAndOrationDie,
+            int bloodAndValorDie,
+            int craftAndReasonDie,
+            int resolveAndSpiritDie,
+            string favorGodName1,
+            string favorGodName2,
+            string favorGodName3,
+            string favorGodName4,
+            int favorScore1,
+            int favorScore2,
+            int favorScore3,
+            int favorScore4,
+            string notes,
+            int userId
+        )
         {
-          this.Id = GetNextHeroId();
-          this.Epithet = epithet;
-          this.Name = name;
+            this.Id = id;
+            this.Epithet = epithet;
+            this.EpithetDie = epithetDie;
+            this.Name = name;
+            this.NameDie = nameDie;
+            this.Lineage = lineage;
+            this.IsDemigod = isDemigod;
+            this.Pronouns = pronouns;
+            this.HonoredGod = honoredGod;
+            this.Strength = strength;
+            this.ArtsAndOrationDie = artsAndOrationDie;
+            this.BloodAndValorDie = bloodAndValorDie;
+            this.CraftAndReasonDie = craftAndReasonDie;
+            this.ResolveAndSpiritDie = resolveAndSpiritDie;
+            this.FavorGodName1 = favorGodName1;
+            this.FavorGodName2 = favorGodName2;
+            this.FavorGodName3 = favorGodName3;
+            this.FavorGodName4 = favorGodName4;
+            this.FavorScore1 = favorScore1;
+            this.FavorScore2 = favorScore2;
+            this.FavorScore3 = favorScore3;
+            this.FavorScore4 = favorScore4;
+            this.Notes = notes;
+            this.UserId = userId;
         }
 
         [Key]
@@ -48,7 +93,8 @@ namespace Hephaestus.Models
         public int FavorScore3 { get; set; }
         public int FavorScore4 { get; set; }
         public string Notes { get; set; }
-
+        public int UserId { get; set; }
+        public User User { get; set; }
 
         private int GetNextHeroId()
         {
