@@ -1,4 +1,5 @@
 ﻿@using System.Configuration
+@using Microsoft.Extensions.Configuration;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,14 +8,6 @@
 <a class="btn btn-primary" asp-controller="Home" asp-action="CreateHero" role="button">Create a Hero</a>
 <a class="btn btn-primary" asp-controller="Home" asp-action="CreateUser" role="button">Create a Profile</a>
 
-<div>
-    <label>Connection String Test</label>
-    <br/>
-    @{
-        var connectionString = Environment.GetEnvironmentVariable("HephaestusDB");
-    }
-    <label>@connectionString</label>
-</div>
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>

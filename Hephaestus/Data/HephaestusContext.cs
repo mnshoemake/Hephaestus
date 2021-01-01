@@ -16,13 +16,6 @@ namespace Hephaestus.Data
         public DbSet<Models.User> Users { get; set; }
         
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    //var connectionString = Config.GetSection("ConnectionStrings")["mainConnectionString"];
-        //    //optionsBuilder.UseSqlServer(connectionString);
-        //    //optionsBuilder.UseSqlServer("Server=tcp:mnsserver.database.windows.net,1433;Initial Catalog=Hephaestus;Persist Security Info=False;User ID=sqluser;Password=Passw0rd!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-        //}
-
         public HephaestusContext(DbContextOptions<HephaestusContext> dbContextOptions)
         :base(dbContextOptions)
         

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -10,7 +11,34 @@ namespace Hephaestus.Models
 {
     public class Hero
     {
-        public Hero(int id,
+        public Hero()
+        {
+            this.Epithet = "DefaultEpithet";
+            this.EpithetDie = 6;
+            this.Name = "DefaultName";
+            this.NameDie = 6;
+            this.Lineage = "";
+            this.IsDemigod = true;
+            this.Pronouns = "";
+            this.HonoredGod = "";
+            this.Strength = "DefaultStrength";
+            this.ArtsAndOrationDie = 6;
+            this.BloodAndValorDie = 6;
+            this.CraftAndReasonDie = 6;
+            this.ResolveAndSpiritDie = 6;
+            this.FavorGodName1 = "";
+            this.FavorGodName2 = "";
+            this.FavorGodName3 = "";
+            this.FavorGodName4 = "";
+            this.FavorScore1 = 0;
+            this.FavorScore2 = 0;
+            this.FavorScore3 = 0;
+            this.FavorScore4 = 0;
+            this.Notes = "";
+            this.UserId = 1;
+        }
+
+        public Hero(
             string epithet,
             int epithetDie,
             string name,
@@ -36,7 +64,6 @@ namespace Hephaestus.Models
             int userId
         )
         {
-            this.Id = id;
             this.Epithet = epithet;
             this.EpithetDie = epithetDie;
             this.Name = name;
@@ -59,10 +86,11 @@ namespace Hephaestus.Models
             this.FavorScore3 = favorScore3;
             this.FavorScore4 = favorScore4;
             this.Notes = notes;
-            this.UserId = userId;
+            this.UserId = 1;
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Epithet { get; set; }

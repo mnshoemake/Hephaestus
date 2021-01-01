@@ -1,19 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
 using Hephaestus.Data;
 using Microsoft.AspNetCore.Mvc;
 using Hephaestus.Models;
+using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Hephaestus.Controllers
 {
+    
 
     public class HomeController : Controller
     {
-        private string strConnectionString = Environment.GetEnvironmentVariable("HephaestusDB");
+        private readonly HephaestusContext _context;
+
+        public HomeController(HephaestusContext context)
+        {
+            _context = context;
+        }
+
+        private readonly string strConnectionString = Environment.GetEnvironmentVariable("HephaestusDB");
 
         private List<Models.Hero> GetHeroesByUserId(int userId)
         {
@@ -59,8 +72,7 @@ namespace Hephaestus.Controllers
                         while (dataReader.Read())
                         {
                             Hero hero = new Hero(
-                                (int) dataReader["Id"]
-                                , (string) dataReader["Epithet"]
+                                (string) dataReader["Epithet"]
                                 , (int) dataReader["EpithetDie"]
                                 , (string) dataReader["Name"]
                                 , (int) dataReader["NameDie"]
@@ -101,8 +113,6 @@ namespace Hephaestus.Controllers
 
         }
 
-        
-
         public IActionResult Index()
         {
             return View();
@@ -131,17 +141,51 @@ namespace Hephaestus.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult CreateHero(Hero hero)
-        //{
-        //    HephaestusContext context = new HephaestusContext(strConnectionString);
-        //    context.Heroes.Add(hero);
-        //    return View("CreateHero");
-        //}
+
+        [HttpPost]
+        public IActionResult CreateHero(Hero hero)
+        {
+            try
+            {
+                _context.Heroes.Add(hero);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save Hero data." +
+                                             "Please try again. If the issue persists, " +
+                                             "please contact your system administrator.");
+
+            }
+
+            return View(hero);
+        }
 
         public IActionResult CreateUser()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateUser(User user)
+        {
+            try
+            {
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save User data." +
+                                             "Please try again. If the issue persists, " +
+                                             "please contact your system administrator.");
+
+            }
+
+            return View(user);
         }
     }
 }
