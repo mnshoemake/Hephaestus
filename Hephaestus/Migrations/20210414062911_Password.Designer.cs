@@ -3,14 +3,16 @@ using Hephaestus.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hephaestus.Migrations
 {
     [DbContext(typeof(HephaestusContext))]
-    partial class HephaestusContextModelSnapshot : ModelSnapshot
+    [Migration("20210414062911_Password")]
+    partial class Password
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

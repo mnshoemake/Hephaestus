@@ -14,16 +14,26 @@ namespace Hephaestus.Models
         {
             this.UserName = "DEFAULT";
             this.EmailAddress = "DEFAULT";
-
+            this.Password = "DEFAULT";
         }
 
-        public User(string userName, string emailAddress)
+        public User(string userName, string emailAddress, string password)
         {
             this.UserName = userName;
             this.EmailAddress = emailAddress;
+            this.Password = password;
         }
 
-        public User(string userName, string firstName, string lastName, string emailAddress)
+        public User(string userName, string firstName, string lastName, string emailAddress, string password)
+        {
+            this.UserName = userName;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.EmailAddress = emailAddress;
+            this.Password = password;
+        }
+
+        public User(int id, string userName, string firstName, string lastName, string emailAddress)
         {
             this.UserName = userName;
             this.FirstName = firstName;
@@ -38,8 +48,10 @@ namespace Hephaestus.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required]
+        public string Password { get; set; }
+        [Required]
         public string EmailAddress { get; set; }
-        public List<Hero> UserHeroes { get; set; }
+        public List<Hero> Heroes { get; set; }
 
     }
 }

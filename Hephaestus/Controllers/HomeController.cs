@@ -12,6 +12,7 @@ using Hephaestus.Models;
 using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace Hephaestus.Controllers
 {
@@ -113,6 +114,50 @@ namespace Hephaestus.Controllers
 
         }
 
+        private Models.User GetUserByUserId(int userId)
+        {
+            User user = new User();
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(strConnectionString))
+                {
+                    sqlConnection.Open();
+                    string strCmd =
+                        @"SELECT
+                            Id
+                            ,UserName
+                            ,FirstName
+                            ,LastName
+                            ,EmailAddress
+                           WHERE
+                                UserId = " + userId.ToString();
+
+                    using (SqlCommand sqlCommand = new SqlCommand(strCmd, sqlConnection))
+                    {
+                        System.Data.IDataReader dataReader = sqlCommand.ExecuteReader();
+                        while (dataReader.Read())
+                        {
+                            user.Id = (int)dataReader["Id"];
+                            user.UserName = (string)dataReader["UserName"];
+                            user.FirstName = (string)dataReader["FirstName"];
+                            user.LastName = (string)dataReader["LastName"];
+                            user.EmailAddress = (string)dataReader["EmailAddress"];
+                            user.Heroes = GetHeroesByUserId(userId);
+                        }
+
+                        dataReader.Close();
+                        dataReader.Dispose();
+                    }
+                }
+                return user;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -187,5 +232,40 @@ namespace Hephaestus.Controllers
 
             return View(user);
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                    var obj = _context.Users.Where(a => a.UserName.Equals(user.UserName) && a.Password.Equals(user.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                    HttpContext.Session.SetInt32("UserId", user.Id);
+                    HttpContext.Session.SetString("UserName", user.UserName);
+                        return RedirectToAction("Index");
+                    }
+             
+            }
+            return RedirectToAction("UserDashboard");
+        }
+
+        public IActionResult UserDashboard()
+        {
+            if (HttpContext.Session.GetInt32("UserId") != null)
+            {
+                int userId = HttpContext.Session.GetInt32("UserId").Value;
+                return View(GetUserByUserId(userId));
+            }
+            else { return RedirectToAction("Login"); }
+
+        }
     }
+
+
 }
