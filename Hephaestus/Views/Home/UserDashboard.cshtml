@@ -1,11 +1,11 @@
 ﻿@model Hephaestus.Models.User
 
 @{
-    ViewData["Title"] = "UserDashboard";
+    ViewData["Title"] = "User Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>UserDashboard</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div>
     <h4>User</h4>
@@ -30,23 +30,27 @@
             @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.EmailAddress)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.EmailAddress)
         </dd>
-        <dd>
-            @Html.DisplayFor(model => model.Heroes)
-        </dd>
     </dl>
+    <br />
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Heroes)</th>
+        </tr>
+
+        @foreach (var item in Model.Heroes)
+        {
+            <tr>
+                <td><div class="glyphicon glyphicon-user"></div>  @Html.DisplayFor(modelItem => item.Name)</td>
+            </tr>
+        }
+
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

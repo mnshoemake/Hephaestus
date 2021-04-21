@@ -64,6 +64,7 @@ namespace Hephaestus.Controllers
                             ,FavorScore4
                             ,Notes
                             ,UserId
+                            FROM Heroes
                            WHERE
                                 UserId = " + userId.ToString();
 
@@ -130,8 +131,9 @@ namespace Hephaestus.Controllers
                             ,FirstName
                             ,LastName
                             ,EmailAddress
+                            FROM Users
                            WHERE
-                                UserId = " + userId.ToString();
+                                Id = " + userId.ToString();
 
                     using (SqlCommand sqlCommand = new SqlCommand(strCmd, sqlConnection))
                     {
@@ -190,20 +192,29 @@ namespace Hephaestus.Controllers
         [HttpPost]
         public IActionResult CreateHero(Hero hero)
         {
-            try
+            if (ModelState.IsValid)
             {
-                _context.Heroes.Add(hero);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateException)
-            {
-                ModelState.AddModelError("", "Unable to save Hero data." +
-                                             "Please try again. If the issue persists, " +
-                                             "please contact your system administrator.");
+                try
+                {
+                    if (HttpContext.Session.GetInt32("UserId") != null)
+                    {
+                        hero.UserId = (int)HttpContext.Session.GetInt32("UserId");
+                    }
+                    else hero.UserId = 0;
 
-            }
+                    _context.Heroes.Add(hero);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save Hero data." +
+                                                 "Please try again. If the issue persists, " +
+                                                 "please contact your system administrator.");
 
+                }
+            }
+            
             return View(hero);
         }
 
@@ -246,13 +257,19 @@ namespace Hephaestus.Controllers
                     var obj = _context.Users.Where(a => a.UserName.Equals(user.UserName) && a.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)
                     {
-                    HttpContext.Session.SetInt32("UserId", user.Id);
-                    HttpContext.Session.SetString("UserName", user.UserName);
-                        return RedirectToAction("Index");
+                    HttpContext.Session.SetInt32("UserId", obj.Id);
+                    HttpContext.Session.SetString("UserName", obj.UserName);
+                        return RedirectToAction("UserDashboard");
                     }
              
             }
-            return RedirectToAction("UserDashboard");
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
         }
 
         public IActionResult UserDashboard()
@@ -263,9 +280,6 @@ namespace Hephaestus.Controllers
                 return View(GetUserByUserId(userId));
             }
             else { return RedirectToAction("Login"); }
-
         }
     }
-
-
 }

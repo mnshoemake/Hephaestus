@@ -12,6 +12,18 @@ body {
     padding-right: 15px;
 }
 
+/*Navbar*/
+.navbar-inverse .navbar-nav > li {
+    color: #9d9d9d;
+    display: inline; 
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    position: relative;
+    
+    padding: 10px 15px;
+    
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
