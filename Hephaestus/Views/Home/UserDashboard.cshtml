@@ -37,20 +37,38 @@
         </dd>
     </dl>
     <br />
-    <table class="table">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Heroes)</th>
-        </tr>
-
+    <div class="container">
+        <div class="row bordered">
+            @Html.DisplayNameFor(model => Model.Heroes)
+        </div>
         @foreach (var item in Model.Heroes)
         {
-            <tr>
-                <td><div class="glyphicon glyphicon-user"></div>  @Html.DisplayFor(modelItem => item.Name)</td>
-            </tr>
+            <div class="row bordered">
+                <div class="col-xs-1 icon bordered"><img src="~/images/helmeticon.png" width="20" height="20" /></div>
+                <div class="col-xs-6 bordered">@Html.DisplayFor(modelItem => item.Name)</div>
+                <div class="col-xs-6 bordered">@Html.ActionLink("Edit", "EditHero", new { id = item.Id })</div>
+                <div class="col-xs-1 bordered">@Html.ActionLink("View", "ViewHero", item) </div>
+                <div class="col-xs-1 bordered">@Html.ActionLink("Delete", "DeleteHero", item)</div>
+            </div>
         }
+    </div>
+    
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Heroes)</th>
+            </tr>
 
-    </table>
-</div>
+            @foreach (var item in Model.Heroes)
+                    {
+            <tr>
+                <td><div><img src="~/images/helmeticon.png" width="20" height="20" /></div></td>
+                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+            </tr>
+                    }
+
+        </table>
+    </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
 </div>

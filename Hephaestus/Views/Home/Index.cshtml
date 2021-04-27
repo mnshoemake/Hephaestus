@@ -1,5 +1,8 @@
 ﻿@using System.Configuration
 @using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@model Hephaestus.Models.User
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,19 +10,48 @@
 <br />
 <br />
 <div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <img class="center-block" src="~/images/helmeticon.png" width="200" height="200"/>
-            <br />
-            <br />
-            <a class="btn btn-primary center-block" asp-controller="Home" asp-action="CreateHero" role="button">Create a Hero</a>
+    @if (HttpContextAccessor.HttpContext.Session.GetString("UserName") != null)
+    {
+        <div class="row">
+
+            <div class="col-xs-6">
+                <img class="center-block" src="~/images/helmeticon.png" width="200" height="200" />
+                <br />
+                <br />
+                <a class="btn btn-primary center-block" asp-controller="Home" asp-action="CreateHero" role="button">Create a Hero</a>
+            </div>
         </div>
-        <div class="col-xs-6">
-            <img class="center-block" src="~/images/personicon.png" width="200" height="200"/>
-            <br />
-            <br />
-            <a class="btn btn-primary center-block" asp-controller="Home" asp-action="CreateUser" role="button">Create a Profile</a>
-        </div>
+    }
+    else
+    {
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Login">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <input asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Log In" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    @*<img class="center-block" src="~/images/personicon.png" width="200" height="200" />
+                    <br />
+                    <br />*@
+                    <a class="btn btn-success center-block" asp-controller="Home" asp-action="CreateUser" role="button">Or Create New Account</a>
+                </div>
+            </div>
+        }
     </div>
-</div>
 <br />

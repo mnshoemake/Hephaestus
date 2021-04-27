@@ -1,0 +1,157 @@
+﻿@model Hephaestus.Models.Hero
+
+@{
+    ViewData["Title"] = "ViewHero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewHero</h2>
+
+<div>
+    <h4>Hero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Epithet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Epithet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EpithetDie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EpithetDie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NameDie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameDie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lineage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lineage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDemigod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDemigod)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pronouns)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pronouns)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HonoredGod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HonoredGod)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Strength)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Strength)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtsAndOrationDie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArtsAndOrationDie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BloodAndValorDie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BloodAndValorDie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CraftAndReasonDie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CraftAndReasonDie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ResolveAndSpiritDie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ResolveAndSpiritDie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorGodName1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorGodName1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorGodName2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorGodName2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorGodName3)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorGodName3)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorGodName4)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorGodName4)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorScore1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorScore1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorScore2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorScore2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorScore3)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorScore3)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorScore4)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorScore4)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.EmailAddress)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

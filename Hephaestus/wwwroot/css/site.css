@@ -75,3 +75,17 @@ body {
     width: 100%;
 }
 
+/* Grid Borders */
+.bordered {
+    outline: 1px dotted rgba(0, 0, 0, 0.25);
+    padding: 8px;
+}
+
+/*Custom Icons */
+
+.icon img {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    display: block;
+}
