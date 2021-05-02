@@ -8,67 +8,29 @@
 <h2>@ViewData["Title"]</h2>
 
 <div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
-    </dl>
-    <br />
     <div class="container">
-        <div class="row bordered">
-            @Html.DisplayNameFor(model => Model.Heroes)
+        <div class="row">
+            <div class="col-xs-2">@Html.DisplayNameFor(model => model.UserName)</div>
+            <div class="col-xs-4 ">@Html.DisplayFor(model => model.UserName)</div>
         </div>
-        @foreach (var item in Model.Heroes)
-        {
-            <div class="row bordered">
-                <div class="col-xs-1 icon bordered"><img src="~/images/helmeticon.png" width="20" height="20" /></div>
-                <div class="col-xs-6 bordered">@Html.DisplayFor(modelItem => item.Name)</div>
-                <div class="col-xs-6 bordered">@Html.ActionLink("Edit", "EditHero", new { id = item.Id })</div>
-                <div class="col-xs-1 bordered">@Html.ActionLink("View", "ViewHero", item) </div>
-                <div class="col-xs-1 bordered">@Html.ActionLink("Delete", "DeleteHero", item)</div>
-            </div>
-        }
+        <div class="row">
+            <div class="col-xs-2">@Html.DisplayNameFor(model => model.EmailAddress)</div>
+            <div class="col-xs-4 ">@Html.DisplayFor(model => model.EmailAddress)</div>
+        </div>
     </div>
-    
-    <div class="container">
-        <table class="table">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Heroes)</th>
-            </tr>
-
-            @foreach (var item in Model.Heroes)
-                    {
-            <tr>
-                <td><div><img src="~/images/helmeticon.png" width="20" height="20" /></div></td>
-                <td> @Html.DisplayFor(modelItem => item.Name)</td>
-            </tr>
-                    }
-
-        </table>
+    <br />
+    <div class="row bordered">
+        @Html.DisplayNameFor(model => Model.Heroes)
     </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    @foreach (var item in Model.Heroes)
+    {
+        <div class="row bordered">
+            <div class="col-xs-1 icon bordered"><img src="~/images/helmeticon.png" width="20" height="20" /></div>
+            <div class="col-xs-3 bordered">@Html.DisplayFor(modelItem => item.Name)</div>
+            <div class="col-xs-1 bordered"><a asp-action="EditHero" asp-route-id="@item.Id">Edit</a></div>
+            <div class="col-xs-1 bordered"><a asp-action="ViewHero" asp-route-id="@item.Id">View</a></div>
+            <div class="col-xs-1 bordered"><a asp-action="DeleteHero" asp-route-id="@item.Id">Delete</a></div>
+        </div>
+    }
+
 </div>

@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Http;
 namespace Hephaestus.Controllers
 {
     
-
     public class HomeController : Controller
     {
         private readonly HephaestusContext _context;
@@ -27,88 +26,16 @@ namespace Hephaestus.Controllers
             _context = context;
         }
 
-        private readonly string strConnectionString = Environment.GetEnvironmentVariable("HephaestusDB");
-
         private List<Models.Hero> GetHeroesByUserId(int userId)
         {
             List<Models.Hero> lstHeroes = new List<Hero>();
 
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(strConnectionString))
-                {
-                    sqlConnection.Open();
-                    string strCmd =
-                        @"SELECT
-                            Id
-                            ,Epithet
-                            ,EpithetDie
-                            ,Name
-                            ,NameDie
-                            ,Lineage
-                            ,IsDemigod
-                            ,Pronouns
-                            ,HonoredGod
-                            ,Strength
-                            ,ArtsAndOrationDie
-                            ,BloodAndValorDie
-                            ,CraftAndReasonDie
-                            ,ResolveAndSpiritDie
-                            ,FavorGodName1
-                            ,FavorGodName2
-                            ,FavorGodName3
-                            ,FavorGodName4
-                            ,FavorScore1
-                            ,FavorScore2
-                            ,FavorScore3
-                            ,FavorScore4
-                            ,Notes
-                            ,UserId
-                            FROM Heroes
-                           WHERE
-                                UserId = " + userId.ToString();
-
-                    using (SqlCommand sqlCommand = new SqlCommand(strCmd, sqlConnection))
-                    {
-                        System.Data.IDataReader dataReader = sqlCommand.ExecuteReader();
-                        while (dataReader.Read())
-                        {
-                            Hero hero = new Hero(
-                                (string) dataReader["Epithet"]
-                                , (int) dataReader["EpithetDie"]
-                                , (string) dataReader["Name"]
-                                , (int) dataReader["NameDie"]
-                                , (string) dataReader["Lineage"]
-                                , (bool) dataReader["IsDemigod"]
-                                , (string) dataReader["Pronouns"]
-                                , (string) dataReader["HonoredGod"]
-                                , (string) dataReader["Strength"]
-                                , (int) dataReader["ArtsAndOrationDie"]
-                                , (int) dataReader["BloodAndValorDie"]
-                                , (int) dataReader["CraftAndReasonDie"]
-                                , (int) dataReader["ResolveAndSpiritDie"]
-                                , (string) dataReader["FavorGodName1"]
-                                , (string) dataReader["FavorGodName2"]
-                                , (string) dataReader["FavorGodName3"]
-                                , (string) dataReader["FavorGodName4"]
-                                , (int) dataReader["FavorScore1"]
-                                , (int) dataReader["FavorScore2"]
-                                , (int) dataReader["FavorScore3"]
-                                , (int) dataReader["FavorScore4"]
-                                , (string) dataReader["Notes"]
-                                , (int) dataReader["UserId"]
-                                , (int)dataReader["Id"]
-                            );
-                            lstHeroes.Add(hero);
-                        }
-
-                        dataReader.Close();
-                        dataReader.Dispose();
-                    }
-                }
-
+                lstHeroes = _context.Heroes.Where(x => x.UserId == userId).ToList();
                 return lstHeroes;
             }
+
             catch (Exception)
             {
                 throw;
@@ -116,43 +43,13 @@ namespace Hephaestus.Controllers
 
         }
 
-        private Models.User GetUserByUserId(int userId)
+        private User GetUserByUserId(int userId)
         {
             User user = new User();
-
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(strConnectionString))
-                {
-                    sqlConnection.Open();
-                    string strCmd =
-                        @"SELECT
-                            Id
-                            ,UserName
-                            ,FirstName
-                            ,LastName
-                            ,EmailAddress
-                            FROM Users
-                           WHERE
-                                Id = " + userId.ToString();
-
-                    using (SqlCommand sqlCommand = new SqlCommand(strCmd, sqlConnection))
-                    {
-                        System.Data.IDataReader dataReader = sqlCommand.ExecuteReader();
-                        while (dataReader.Read())
-                        {
-                            user.Id = (int)dataReader["Id"];
-                            user.UserName = (string)dataReader["UserName"];
-                            user.FirstName = (string)dataReader["FirstName"];
-                            user.LastName = (string)dataReader["LastName"];
-                            user.EmailAddress = (string)dataReader["EmailAddress"];
-                            user.Heroes = GetHeroesByUserId(userId);
-                        }
-
-                        dataReader.Close();
-                        dataReader.Dispose();
-                    }
-                }
+                user = (User)_context.Users.Where(x => x.Id == userId).FirstOrDefault();
+                user.Heroes = _context.Heroes.Where(h => h.UserId == userId).ToList();
                 return user;
             }
             catch (Exception)
@@ -217,35 +114,62 @@ namespace Hephaestus.Controllers
                     ModelState.AddModelError("", "Unable to save Hero data. " +
                                                  "Please try again. If the issue persists, " +
                                                  "please contact your system administrator.");
-
+                    return View();
                 }
             }
             
             return View(hero);
         }
 
-        public IActionResult DeleteHero(int heroID)
+        public IActionResult DeleteHero(int id)
         {
-            var hero = _context.Heroes.Where(a => a.Id.Equals(heroID)).FirstOrDefault();
+            try
+            {
+                var deletedHero = _context.Heroes.Single(h => h.Id.Equals(id));
+                _context.Remove(deletedHero);
+                _context.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                ModelState.AddModelError("", "Unable to delete Hero data. " +
+                                                  "Please try again. If the issue persists, " +
+                                                  "please contact your system administrator.");
+                
+            }
             return RedirectToAction("UserDashboard");
         }
 
-        public IActionResult ViewHero(int heroID)
+        public IActionResult ViewHero(int id)
         {
-            var hero = _context.Heroes.Where(a => a.Id.Equals(heroID)).FirstOrDefault();
-            return View(hero);
-        }
-
-        [HttpPost]
-        public IActionResult ViewHero(Hero hero)
-        {
-            return View(hero);
+            try
+            {
+                var hero = _context.Heroes.Where(a => a.Id.Equals(id)).FirstOrDefault();
+                return View(hero);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to find Hero data. " +
+                                                  "Please try again. If the issue persists, " +
+                                                  "please contact your system administrator.");
+                return RedirectToAction("UserDashboard");
+            }
         }
 
         public IActionResult EditHero(int id)
         {
-            var hero = _context.Heroes.Where(a => a.Id.Equals(id)).FirstOrDefault();
-            return View(hero);
+            try
+            {
+                var hero = _context.Heroes.Where(a => a.Id.Equals(id)).FirstOrDefault();
+                return View(hero);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to find Hero data. " +
+                                                  "Please try again. If the issue persists, " +
+                                                  "please contact your system administrator.");
+                return RedirectToAction("UserDashboard");
+            }
+            
         }
         
         //[HttpPost]
@@ -303,14 +227,22 @@ namespace Hephaestus.Controllers
         {
             if (ModelState.IsValid)
             {
+                try
+                {
                     var obj = _context.Users.Where(a => a.EmailAddress.Equals(user.EmailAddress) && a.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)
                     {
-                    HttpContext.Session.SetInt32("UserId", obj.Id);
-                    HttpContext.Session.SetString("UserName", obj.UserName);
+                        HttpContext.Session.SetInt32("UserId", obj.Id);
+                        HttpContext.Session.SetString("UserName", obj.UserName);
                         return RedirectToAction("UserDashboard");
                     }
-             
+                }
+                catch(Exception e)
+                {
+                    ModelState.AddModelError("", "Unable to find User data." +
+                             "Please try again. If the issue persists, " +
+                             "please contact your system administrator.");
+                }
             }
             return RedirectToAction("Index");
         }

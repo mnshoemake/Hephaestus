@@ -46,18 +46,25 @@ namespace Hephaestus.Models
         [Required]
         [Display(Name = "Username")]
         public string UserName { get; set; }
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]
         [Display(Name = "Email Address")]
+        [EmailAddress]
         public string EmailAddress { get; set; }
+
         [Display(Name = "Heroes")]
         public List<Hero> Heroes { get; set; }
+
+        //First Name and Last Name not currently used.
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+
+        private readonly string strConnectionString = Environment.GetEnvironmentVariable("HephaestusDB");
 
     }
 }

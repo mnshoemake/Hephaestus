@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,10 +8,13 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+
 namespace Hephaestus.Models
 {
+
     public class Hero
     {
+       
         public Hero()
         {
             this.Epithet = "DefaultEpithet";
@@ -141,6 +145,10 @@ namespace Hephaestus.Models
             this.Id = id;
         }
 
+
+
+       
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -184,6 +192,8 @@ namespace Hephaestus.Models
 
             return lastHeroId + 1;
         }
+
+
     }
 
 
@@ -214,5 +224,8 @@ namespace Hephaestus.Models
         Other = 13
     }
 
+
+
+   
 
 }
