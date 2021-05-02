@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace Hephaestus.Controllers
 {
@@ -109,7 +110,7 @@ namespace Hephaestus.Controllers
                     _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (DbUpdateException e)
+                catch (DbUpdateException)
                 {
                     ModelState.AddModelError("", "Unable to save Hero data. " +
                                                  "Please try again. If the issue persists, " +
@@ -129,7 +130,7 @@ namespace Hephaestus.Controllers
                 _context.Remove(deletedHero);
                 _context.SaveChanges();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 ModelState.AddModelError("", "Unable to delete Hero data. " +
                                                   "Please try again. If the issue persists, " +
@@ -146,7 +147,7 @@ namespace Hephaestus.Controllers
                 var hero = _context.Heroes.Where(a => a.Id.Equals(id)).FirstOrDefault();
                 return View(hero);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError("", "Unable to find Hero data. " +
                                                   "Please try again. If the issue persists, " +
@@ -162,7 +163,7 @@ namespace Hephaestus.Controllers
                 var hero = _context.Heroes.Where(a => a.Id.Equals(id)).FirstOrDefault();
                 return View(hero);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError("", "Unable to find Hero data. " +
                                                   "Please try again. If the issue persists, " +
@@ -171,25 +172,25 @@ namespace Hephaestus.Controllers
             }
             
         }
-        
-        //[HttpPost]
-        //public IActionResult EditHero(Hero hero)
-        //{
-        //    try
-        //    {
-        //        _context.Heroes.Add(hero);
-        //        _context.SaveChanges();
-        //        return RedirectToAction("UserDashboard");
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        ModelState.AddModelError("", "Unable to save Hero data." +
-        //                                     "Please try again. If the issue persists, " +
-        //                                     "please contact your system administrator.");
 
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult EditHero(Hero hero)
+        {
+            try
+            {
+                _context.Entry(hero).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("ViewHero", hero.Id);
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save Hero data." +
+                                             "Please try again. If the issue persists, " +
+                                             "please contact your system administrator.");
+
+            }
+            return View();
+        }
 
         public IActionResult CreateUser()
         {
@@ -237,7 +238,7 @@ namespace Hephaestus.Controllers
                         return RedirectToAction("UserDashboard");
                     }
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     ModelState.AddModelError("", "Unable to find User data." +
                              "Please try again. If the issue persists, " +
