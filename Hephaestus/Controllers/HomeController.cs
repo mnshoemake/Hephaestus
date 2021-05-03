@@ -108,7 +108,7 @@ namespace Hephaestus.Controllers
 
                     _context.Heroes.Add(hero);
                     _context.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("UserDashboard");
                 }
                 catch (DbUpdateException)
                 {
@@ -170,7 +170,6 @@ namespace Hephaestus.Controllers
                                                   "please contact your system administrator.");
                 return RedirectToAction("UserDashboard");
             }
-            
         }
 
         [HttpPost]
@@ -180,7 +179,7 @@ namespace Hephaestus.Controllers
             {
                 _context.Entry(hero).State = EntityState.Modified;
                 _context.SaveChanges();
-                return RedirectToAction("ViewHero", hero.Id);
+                return RedirectToAction("ViewHero", new { id = hero.Id });
             }
             catch (DbUpdateException)
             {
@@ -212,7 +211,6 @@ namespace Hephaestus.Controllers
                 ModelState.AddModelError("", "Unable to save User data." +
                                              "Please try again. If the issue persists, " +
                                              "please contact your system administrator.");
-
             }
 
             return View(user);
