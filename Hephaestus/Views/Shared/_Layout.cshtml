@@ -33,10 +33,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     @if (HttpContextAccessor.HttpContext.Session.GetString("UserName") != null)
                     {
-                    <li><a asp-area="" asp-controller="Home" asp-action="UserDashboard">Dashboard</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="UserDashboard">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="LogOut">Log Out</a></li>    
                     }
                     else

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 namespace Hephaestus.Data
 {

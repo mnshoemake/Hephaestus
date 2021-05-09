@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Hephaestus.Data;
 using Microsoft.AspNetCore.Mvc;
 using Hephaestus.Models;
-using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
