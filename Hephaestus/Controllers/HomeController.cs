@@ -234,6 +234,11 @@ namespace Hephaestus.Controllers
                         HttpContext.Session.SetString("UserName", obj.UserName);
                         return RedirectToAction("UserDashboard");
                     }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid credentials provided. Please try again.");
+                        return View();
+                    }
                 }
                 catch(Exception)
                 {
@@ -242,7 +247,7 @@ namespace Hephaestus.Controllers
                              "please contact your system administrator.");
                 }
             }
-            return RedirectToAction("Index");
+            return View();
         }
 
         public IActionResult LogOut()
